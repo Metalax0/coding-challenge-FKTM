@@ -31,9 +31,7 @@ const CharacterTable = () => {
     };
 
     // Method : Changes route from home to page
-    const handleTableRowClick = (data: any) => {
-        console.log("Tagble row clicked", data);
-    };
+    const handleTableRowClick = (data: any) => {};
 
     // Method : Updates page number, fetches data with applied offset
     const handlePageChange = (page: number) => {
@@ -44,7 +42,6 @@ const CharacterTable = () => {
 
     // Method : Keeps track of character data to represent in chart
     const handleCharacterSelection = (e: any) => {
-        console.log("selected");
         let selectedIndex =
             e.target.id === "checkbox-all"
                 ? records.map((data: CharacterRecordType, i: number) => i)

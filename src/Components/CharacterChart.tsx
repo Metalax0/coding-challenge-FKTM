@@ -7,11 +7,9 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../StateManagement/Store";
-import { CharacterRecordType } from "../InterfaceAndTypes/characterType";
 
 ChartJS.register(
     CategoryScale,

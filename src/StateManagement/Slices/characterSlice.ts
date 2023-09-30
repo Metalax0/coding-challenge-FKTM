@@ -42,11 +42,25 @@ const characterOptions: CreateSliceOptions = {
             state: CharacterStateType,
             action: PayloadAction<number[] | null>
         ) => {
+            let updatedSelectedRecordsIndex;
+
+            if (action.payload) {
+                updatedSelectedRecordsIndex = action.payload.filter(
+                    (item) => !state.selectedRecordsIndex.includes(item)
+                );
+            } else {
+                updatedSelectedRecordsIndex = [0];
+            }
+
             return {
                 ...state,
-                selectedRecordsIndex: action.payload
-                    ? [...state.selectedRecordsIndex, ...action.payload]
-                    : [0],
+                selectedRecordsIndex:
+                    updatedSelectedRecordsIndex.length > 0
+                        ? [
+                              ...state.selectedRecordsIndex,
+                              ...updatedSelectedRecordsIndex,
+                          ]
+                        : [0],
             };
         },
     },
