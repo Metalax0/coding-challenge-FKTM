@@ -6,6 +6,7 @@ import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 const CharacterSearch = () => {
     const dispatch = useDispatch();
 
+    // Method: Triggers fetching of character data based on searched string (starts by)
     const handleSearch = (searchText: string) => {
         setCharacterRecords({
             offset: 0,

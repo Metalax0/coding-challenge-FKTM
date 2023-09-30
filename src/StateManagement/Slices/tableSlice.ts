@@ -5,7 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import { TableStateType } from "../../InterfaceAndTypes/tableType";
 
-// Initial state for characterSlice
 const initialState: TableStateType = {
     activePage: 1,
 };

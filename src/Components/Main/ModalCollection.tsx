@@ -7,6 +7,7 @@ const ModalCollection = () => {
     const dispatch = useDispatch();
     const { modal } = useSelector((state: RootState) => state.ui);
 
+    // Method : closes / hides notification model and resets data
     const handleCancelClick = () => {
         dispatch(
             setModal({
@@ -17,6 +18,7 @@ const ModalCollection = () => {
         );
     };
 
+    // Method : provides style to modal element according to message type (error, warning, etc)
     const getModalClass = () => {
         switch (modal.type) {
             case "error":

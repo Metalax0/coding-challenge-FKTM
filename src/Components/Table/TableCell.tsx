@@ -8,6 +8,7 @@ const TableCell = ({
     record,
     activePage,
     handleCharacterSelection,
+    handleTableRowClick,
     selectedRecordsIndex,
 }: TableCellProps) => {
     // Method : Alternates between two background colors for table row
@@ -18,7 +19,6 @@ const TableCell = ({
 
     // Method: Returns JSX elements according to heading type
     const renderCell = () => {
-        console.log(activePage);
         switch (heading) {
             case "":
                 return (
@@ -34,7 +34,10 @@ const TableCell = ({
 
             case "S.N":
                 return (
-                    <label>
+                    <label
+                        className="hover:cursor-pointer"
+                        onClick={(e) => handleTableRowClick(e, rowNum)}
+                    >
                         {activePage === 1
                             ? rowNum + 1
                             : (activePage - 1) * 20 + rowNum + 1}
@@ -43,7 +46,10 @@ const TableCell = ({
 
             case "Name":
                 return (
-                    <label>
+                    <label
+                        className="hover:cursor-pointer"
+                        onClick={(e) => handleTableRowClick(e, rowNum)}
+                    >
                         {record.name ? record.name : "--- Missing Name ---"}
                     </label>
                 );
@@ -51,10 +57,11 @@ const TableCell = ({
             case "Description":
                 return (
                     <Paragraph
+                        onClick={(e) => handleTableRowClick(e, rowNum)}
                         ellipsis={{
                             rows: 2,
                         }}
-                        className="antd-paragraph"
+                        className="antd-paragraph hover:cursor-pointer"
                     >
                         {record.description
                             ? record.description

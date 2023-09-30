@@ -1,55 +1,54 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../StateManagement/Store";
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useEffect } from "react";
 import { setCharacterRecords } from "../../Functions/General/setCharacterRecords";
 import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 import ComicSeriesCols from "./ComicSeriesCols";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { setIsLoaded } from "../../StateManagement/Slices/uiSlice";
 
 const CharacterDetail = () => {
+    let { id } = useParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { records, profileRecord } = useSelector(
         (state: RootState) => state.character
     );
     const comicData = profileRecord.comics;
     const seriesData = profileRecord.series;
+    const record = records[0];
 
-    const record = records[10];
-
-    console.log(profileRecord);
+    useEffect(() => {
+        if (record.id !== 0)
+            setCharacterRecords({
+                offset: 0,
+                dispatch,
+                type: URLTypes.COMIC_SERIES_BY_ID,
+                id: id ? parseInt(id) : 1010354,
+            });
+    }, [records]);
 
     useEffect(() => {
         setCharacterRecords({
             offset: 0,
             dispatch,
             type: URLTypes.RECORDS_BY_ID,
-            id: 1010354,
+            id: id ? parseInt(id) : 1010354,
         });
     }, []);
 
-    // // Get list of html lables containing names of all comics related to current character
-    // const getAllComics = () => {
-    //     return comicData.map((comic: any, i: number) => (
-    //         <label className="border border-b-black py-2" key={i}>
-    //             {comic.title}
-    //         </label>
-    //     ));
-    // };
+    // Method: Initiate loading and navigate back to home page
+    const handleHomeBttnClick = () => {
+        dispatch(setIsLoaded(false));
+        navigate("/");
+    };
 
-    // // Get list of html lables containing names of all series related to current character
-    // const getAllSeries = () => {
-    //     return seriesData.map((series: any, i: number) => (
-    //         <label className="border border-b-black py-2" key={i}>
-    //             {series.title}
-    //         </label>
-    //     ));
-    // };
-
-    if (profileRecord.series[0].title === "") return null;
+    if (!record) return null;
     else
         return (
-            <div className="w-full h-screen flex flex-col justify-center items-center ">
+            <div className="w-full h-screen flex flex-col gap-10 justify-center items-center ">
                 <div className="flex justify-center items-center transition duration-300 ease-in-out hover:scale-95 shadow-[20px_25px_25px_5px_rgb(0,0,0,0.3)] bg-orange-100">
                     <Card
                         style={{
@@ -82,35 +81,16 @@ const CharacterDetail = () => {
                         comicData={comicData}
                         seriesData={seriesData}
                     />
-                    {/* <div className="flex">
-                        <div className="p-4 text-xs lg:text-xl md:text-lg sm:text-sm">
-                            <h1 className="bg-red-500 text-white p-1">
-                                <b>Comic</b> ({record.comics.available})
-                            </h1>
-                            <div
-                                className="overflow-auto max-h-80 flex flex-col "
-                                style={{ width: "30vw" }}
-                            >
-                                {getAllComics()}
-                            </div>
-                        </div>
-                        <div className="p-4 text-xs lg:text-xl md:text-lg sm:text-sm">
-                            <h1 className="bg-indigo-500 text-white p-1">
-                                <b>Series</b> ({record.comics.available})
-                            </h1>
-                            <div
-                                className="overflow-auto max-h-80 flex flex-col"
-                                style={{ width: "30vw" }}
-                            >
-                                {getAllSeries()}
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
+                <button
+                    type="button"
+                    className="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none "
+                    onClick={handleHomeBttnClick}
+                >
+                    Home
+                </button>
             </div>
         );
 };
 
 export default CharacterDetail;
-
-// search by id

@@ -1,18 +1,22 @@
 import { setModal } from "../../StateManagement/Slices/uiSlice";
-import { getAllRecordsAPIURL } from "../General/getAPIURL";
+import { getRecordsById } from "../General/getAPIURL";
 
-export const fetchAllRecords = async (
-    offset: number,
+export const fetchRecordsById = async (
+    id: number,
     dispatch: React.Dispatch<any>
 ) => {
     let response, data;
 
     // Error handling : fetching of data from the API
     try {
-        response = await fetch(getAllRecordsAPIURL({ offset }));
+        response = await fetch(
+            getRecordsById({
+                id,
+            })
+        );
     } catch (error) {
         const msg =
-            "Error Fetching character records from API. For more details check console (fn + f12)";
+            "Error Fetching character records from API. For more details check console (fn + f12) ";
         console.error(msg, error);
         dispatch(
             setModal({
@@ -29,7 +33,7 @@ export const fetchAllRecords = async (
         data = (await response.json()).data.results;
     } catch (error) {
         const msg =
-            "Error Converting character data from API. For more details check console (fn + f12)";
+            "Error Converting character data from API. For more details check console (fn + f12) ";
         console.error(msg, error);
         dispatch(
             setModal({

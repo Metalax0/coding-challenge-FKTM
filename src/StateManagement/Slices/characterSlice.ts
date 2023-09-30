@@ -8,7 +8,6 @@ import {
     CharacterStateType,
 } from "../../InterfaceAndTypes/characterType";
 
-// Initial state for characterSlice
 const initialState: CharacterStateType = {
     records: [
         {
@@ -42,6 +41,7 @@ const characterOptions: CreateSliceOptions = {
             };
         },
 
+        // Handles data related to comics and series
         setProfileRecord: (
             state: CharacterStateType,
             action: PayloadAction<{
@@ -77,9 +77,8 @@ const characterOptions: CreateSliceOptions = {
                             (item) => !indicesToRemove.includes(item)
                         )
                     );
-                // }
             }
-            // If changing page
+            // If page is changed, resets selected index to 0
             else {
                 updatedSelectedRecordsIndex = [0];
             }

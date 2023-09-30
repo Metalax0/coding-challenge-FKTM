@@ -1,5 +1,5 @@
 import { setModal } from "../../StateManagement/Slices/uiSlice";
-import { getComicIdAPIURL } from "../General/getCharacterAPIURL";
+import { getComicIdAPIURL } from "../General/getAPIURL";
 
 export const fetchComicById = async (
     dispatch: React.Dispatch<any>,
@@ -31,6 +31,13 @@ export const fetchComicById = async (
         const msg =
             "Error Converting comic data from API. For more details check console (fn + f12)";
         console.error(msg, error);
+        dispatch(
+            setModal({
+                isOpen: true,
+                content: msg,
+                type: "error",
+            })
+        );
         return;
     }
 

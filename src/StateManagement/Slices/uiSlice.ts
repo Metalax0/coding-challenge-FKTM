@@ -19,6 +19,7 @@ const uiOptions: CreateSliceOptions = {
     name: "table",
     initialState,
     reducers: {
+        // Toggels model on and off with appropriate data
         setModal: (state: uiStateType, action: PayloadAction<uiModalType>) => {
             const { isOpen, content, type } = action.payload;
             return {
@@ -31,6 +32,7 @@ const uiOptions: CreateSliceOptions = {
             };
         },
 
+        // Responsible for turning loading state on / off
         setIsLoaded: (state: uiStateType, action: PayloadAction<boolean>) => {
             return {
                 ...state,

@@ -3,11 +3,11 @@ import {
     setCharacterDetails,
     setProfileRecord,
 } from "../../StateManagement/Slices/characterSlice";
-import { setModal } from "../../StateManagement/Slices/uiSlice";
 import { fetchAllRecords } from "../API/fetchAllRecords";
 import { fetchComicById } from "../API/fetchComicById";
 import { fetchSeriesById } from "../API/fetchSeriesById";
 import { fetchRecordsByName } from "../API/fetchRecordsByName";
+import { fetchRecordsById } from "../API/fetchRecordsById";
 
 export const setCharacterRecords = async ({
     offset,
@@ -24,6 +24,7 @@ export const setCharacterRecords = async ({
 }) => {
     let characterRecords = null;
 
+    // Dispatches updates to redux store (state) accordingly
     switch (type) {
         case URLTypes.RECORDS_ALL:
             characterRecords = await fetchAllRecords(offset, dispatch);
@@ -31,11 +32,16 @@ export const setCharacterRecords = async ({
             break;
 
         case URLTypes.RECORDS_BY_NAME:
-            characterRecords = await fetchRecordsByName(name!);
+            characterRecords = await fetchRecordsByName(name!, dispatch);
             dispatch(setCharacterDetails(characterRecords));
             break;
 
         case URLTypes.RECORDS_BY_ID:
+            characterRecords = await fetchRecordsById(id!, dispatch);
+            dispatch(setCharacterDetails(characterRecords));
+            break;
+
+        case URLTypes.COMIC_SERIES_BY_ID:
             const comicRecords = await fetchComicById(dispatch, id!);
             const seriesRecords = await fetchSeriesById(dispatch, id!);
             dispatch(setProfileRecord({ comicRecords, seriesRecords }));
