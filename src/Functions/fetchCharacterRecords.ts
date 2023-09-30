@@ -1,11 +1,11 @@
 import { getCharacterAPIURL } from "./getCharacterAPIURL";
 
-export const fetchCharacterRecords = async () => {
+export const fetchCharacterRecords = async (offset: number) => {
     let response, data;
 
     // Error handling : fetching of data from the API
     try {
-        response = await fetch(getCharacterAPIURL({ offset: 5 }));
+        response = await fetch(getCharacterAPIURL(offset));
     } catch (error) {
         console.error(
             "Error Fetching character records from API. Details => ",

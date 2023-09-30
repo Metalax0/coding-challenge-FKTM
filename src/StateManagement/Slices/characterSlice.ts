@@ -6,22 +6,17 @@ import {
 import {
     CharacterRecordType,
     CharacterStateType,
-} from "../../InterfaceAndTypes/characterTypes";
+} from "../../InterfaceAndTypes/characterType";
 
 const initialState: CharacterStateType = {
     records: [
         {
-            comics: null,
-            description: "",
-            events: null,
             id: 0,
-            modified: "",
-            name: "",
-            resourceURI: "",
+            name: "Loading...",
+            description: "Loading...",
+            thumbnail: { extension: "", path: "" },
+            comics: null,
             series: null,
-            stories: null,
-            thumbnail: null,
-            urls: null,
         },
     ],
 };
