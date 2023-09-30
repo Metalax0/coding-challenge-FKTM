@@ -2,16 +2,17 @@ import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 import { setModal } from "../../StateManagement/Slices/uiSlice";
 import { getCharacterAPIURL } from "../General/getCharacterAPIURL";
 
-export const fetchAllRecords = async (
+export const fetchRecordById = async (
     offset: number,
-    dispatch: React.Dispatch<any>
+    dispatch: React.Dispatch<any>,
+    id: number
 ) => {
     let response, data;
 
     // Error handling : fetching of data from the API
     try {
         response = await fetch(
-            getCharacterAPIURL({ offset, type: URLTypes.RECORDS_ALL })
+            getCharacterAPIURL({ offset, type: URLTypes.RECORDS_BY_ID, id })
         );
     } catch (error) {
         const msg =

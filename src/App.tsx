@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./StateManagement/Store";
 import { setIsLoaded } from "./StateManagement/Slices/uiSlice";
-import Home from "./Components/Initial/Home";
-import ModalCollection from "./Components/Initial/ModalCollection";
-import Loading from "./Components/Initial/Loading";
+import Home from "./Components/Main/Home";
+import ModalCollection from "./Components/Main/ModalCollection";
+import Loading from "./Components/Main/Loading";
+import CharacterDetail from "./Components/Character/CharacterDetail";
 
 function App() {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
             <Home />
             <ModalCollection />
             {!isLoaded ? <Loading /> : null}
+            <CharacterDetail />
         </>
     );
 }

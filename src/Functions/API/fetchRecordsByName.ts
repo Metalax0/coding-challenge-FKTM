@@ -7,7 +7,11 @@ export const fetchRecordsByName = async (name?: string) => {
     // Error handling : fetching of data from the API
     try {
         response = await fetch(
-            getCharacterAPIURL(0, URLTypes.RECORDS_BY_Name, name)
+            getCharacterAPIURL({
+                offset: 0,
+                type: URLTypes.RECORDS_BY_NAME,
+                name,
+            })
         );
     } catch (error) {
         const msg =

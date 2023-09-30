@@ -21,6 +21,16 @@ const initialState: CharacterStateType = {
         },
     ],
     selectedRecordsIndex: [0],
+    profileRecord: [
+        {
+            id: 0,
+            name: "Loading...",
+            description: "Loading...",
+            thumbnail: { extension: "", path: "" },
+            comics: null,
+            series: null,
+        },
+    ],
 };
 
 const characterOptions: CreateSliceOptions = {
@@ -38,6 +48,16 @@ const characterOptions: CreateSliceOptions = {
             };
         },
 
+        setProfileRecord: (
+            state: CharacterStateType,
+            action: PayloadAction<[CharacterRecordType]>
+        ) => {
+            return {
+                ...state,
+                profileRecord: action.payload,
+            };
+        },
+
         // Sets the index of data to be shown in bar chart
         setSelectedRecordsIndex: (
             state: CharacterStateType,
@@ -45,39 +65,18 @@ const characterOptions: CreateSliceOptions = {
         ) => {
             let updatedSelectedRecordsIndex;
 
-            // If within same page
             if (action.payload) {
-                // If selected all
-                if (
-                    action.payload.length === 20 &&
-                    state.selectedRecordsIndex.length !== 20
-                ) {
-                    let numArray = [];
-                    for (var i = 0; i < 20; i++) {
-                        numArray.push(i);
-                    }
-                    updatedSelectedRecordsIndex = numArray;
-                }
-                // If deselected all
-                else if (
-                    action.payload.length === 20 &&
-                    state.selectedRecordsIndex.length === 20
-                ) {
-                    updatedSelectedRecordsIndex = [0];
-                }
-                // If selected / deselected one
-                else {
-                    const indicesToRemove = action.payload.filter((item) =>
-                        state.selectedRecordsIndex.includes(item)
+                const indicesToRemove = action.payload.filter((item) =>
+                    state.selectedRecordsIndex.includes(item)
+                );
+                updatedSelectedRecordsIndex = state.selectedRecordsIndex
+                    .filter((item) => !indicesToRemove.includes(item))
+                    .concat(
+                        action.payload.filter(
+                            (item) => !indicesToRemove.includes(item)
+                        )
                     );
-                    updatedSelectedRecordsIndex = state.selectedRecordsIndex
-                        .filter((item) => !indicesToRemove.includes(item))
-                        .concat(
-                            action.payload.filter(
-                                (item) => !indicesToRemove.includes(item)
-                            )
-                        );
-                }
+                // }
             }
             // If changing page
             else {
@@ -93,6 +92,9 @@ const characterOptions: CreateSliceOptions = {
 };
 
 const characterSlice = createSlice(characterOptions);
-export const { setCharacterDetails, setSelectedRecordsIndex } =
-    characterSlice.actions;
+export const {
+    setCharacterDetails,
+    setSelectedRecordsIndex,
+    setProfileRecord,
+} = characterSlice.actions;
 export default characterSlice.reducer;

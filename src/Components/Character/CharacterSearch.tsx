@@ -10,7 +10,7 @@ const CharacterSearch = () => {
         setCharacterRecords({
             offset: 0,
             dispatch,
-            type: URLTypes.RECORDS_BY_Name,
+            type: URLTypes.RECORDS_BY_NAME,
             name: searchText,
         });
     };
