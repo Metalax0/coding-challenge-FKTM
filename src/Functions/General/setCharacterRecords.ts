@@ -5,7 +5,8 @@ import {
 } from "../../StateManagement/Slices/characterSlice";
 import { setModal } from "../../StateManagement/Slices/uiSlice";
 import { fetchAllRecords } from "../API/fetchAllRecords";
-import { fetchRecordById } from "../API/fetchRecordById";
+import { fetchComicById } from "../API/fetchComicById";
+import { fetchSeriesById } from "../API/fetchSeriesById";
 import { fetchRecordsByName } from "../API/fetchRecordsByName";
 
 export const setCharacterRecords = async ({
@@ -26,30 +27,21 @@ export const setCharacterRecords = async ({
     switch (type) {
         case URLTypes.RECORDS_ALL:
             characterRecords = await fetchAllRecords(offset, dispatch);
+            dispatch(setCharacterDetails(characterRecords));
             break;
 
         case URLTypes.RECORDS_BY_NAME:
-            characterRecords = await fetchRecordsByName(name);
+            characterRecords = await fetchRecordsByName(name!);
+            dispatch(setCharacterDetails(characterRecords));
             break;
 
         case URLTypes.RECORDS_BY_ID:
-            characterRecords = await fetchRecordById(offset, dispatch, id!);
+            const comicRecords = await fetchComicById(dispatch, id!);
+            const seriesRecords = await fetchSeriesById(dispatch, id!);
+            dispatch(setProfileRecord({ comicRecords, seriesRecords }));
             break;
 
         default:
             return;
     }
-
-    if (characterRecords.length !== 0) {
-        if (id) dispatch(setProfileRecord(characterRecords));
-        else dispatch(setCharacterDetails(characterRecords));
-    } else
-        dispatch(
-            setModal({
-                isOpen: true,
-                type: "error",
-                content:
-                    "Search did not match any data (try searching for exact name: eg: captain america) ",
-            })
-        );
 };

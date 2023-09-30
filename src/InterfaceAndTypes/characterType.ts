@@ -24,8 +24,13 @@ export interface CharacterRecordType {
     series: ItemsDataType | null;
 }
 
+export interface ProfileRecordType {
+    series: [{ title: string }];
+    comics: [{ title: string }];
+}
+
 export interface CharacterStateType {
     records: CharacterRecordType[];
-    profileRecord: CharacterRecordType[];
+    profileRecord: ProfileRecordType;
     selectedRecordsIndex: number[];
 }

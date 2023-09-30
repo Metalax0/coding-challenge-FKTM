@@ -1,15 +1,13 @@
-import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
-import { getCharacterAPIURL } from "../General/getCharacterAPIURL";
+import { getRecordsByNameAPIURL } from "../General/getCharacterAPIURL";
 
-export const fetchRecordsByName = async (name?: string) => {
+export const fetchRecordsByName = async (name: string) => {
     let response, data;
 
     // Error handling : fetching of data from the API
     try {
         response = await fetch(
-            getCharacterAPIURL({
+            getRecordsByNameAPIURL({
                 offset: 0,
-                type: URLTypes.RECORDS_BY_NAME,
                 name,
             })
         );

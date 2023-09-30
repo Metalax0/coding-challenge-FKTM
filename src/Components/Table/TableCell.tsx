@@ -18,6 +18,7 @@ const TableCell = ({
 
     // Method: Returns JSX elements according to heading type
     const renderCell = () => {
+        console.log(activePage);
         switch (heading) {
             case "":
                 return (
@@ -36,7 +37,7 @@ const TableCell = ({
                     <label>
                         {activePage === 1
                             ? rowNum + 1
-                            : activePage * 20 + rowNum + 1}
+                            : (activePage - 1) * 20 + rowNum + 1}
                     </label>
                 );
 

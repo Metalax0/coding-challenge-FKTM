@@ -12,6 +12,8 @@ const TablePagination = () => {
     const handlePageChange = (page: number) => {
         const offset = page === 1 ? 0 : (page - 1) * 20;
 
+        console.log(offset);
+
         setCharacterRecords({ offset, dispatch, type: URLTypes.RECORDS_ALL });
         dispatch(setActivePage(page));
         dispatch(setSelectedRecordsIndex(null));

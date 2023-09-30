@@ -21,16 +21,10 @@ const initialState: CharacterStateType = {
         },
     ],
     selectedRecordsIndex: [0],
-    profileRecord: [
-        {
-            id: 0,
-            name: "Loading...",
-            description: "Loading...",
-            thumbnail: { extension: "", path: "" },
-            comics: null,
-            series: null,
-        },
-    ],
+    profileRecord: {
+        series: [{ title: "" }],
+        comics: [{ title: "" }],
+    },
 };
 
 const characterOptions: CreateSliceOptions = {
@@ -50,11 +44,18 @@ const characterOptions: CreateSliceOptions = {
 
         setProfileRecord: (
             state: CharacterStateType,
-            action: PayloadAction<[CharacterRecordType]>
+            action: PayloadAction<{
+                comicRecords: [{ title: string }];
+                seriesRecords: [{ title: string }];
+            }>
         ) => {
+            const { comicRecords, seriesRecords } = action.payload;
             return {
                 ...state,
-                profileRecord: action.payload,
+                profileRecord: {
+                    series: seriesRecords,
+                    comics: comicRecords,
+                },
             };
         },
 

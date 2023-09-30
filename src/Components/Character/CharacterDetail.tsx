@@ -5,12 +5,19 @@ import Meta from "antd/es/card/Meta";
 import { useEffect } from "react";
 import { setCharacterRecords } from "../../Functions/General/setCharacterRecords";
 import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
+import ComicSeriesCols from "./ComicSeriesCols";
 
 const CharacterDetail = () => {
     const dispatch = useDispatch();
-    const { profileRecord } = useSelector(
+    const { records, profileRecord } = useSelector(
         (state: RootState) => state.character
     );
+    const comicData = profileRecord.comics;
+    const seriesData = profileRecord.series;
+
+    const record = records[10];
+
+    console.log(profileRecord);
 
     useEffect(() => {
         setCharacterRecords({
@@ -21,68 +28,64 @@ const CharacterDetail = () => {
         });
     }, []);
 
-    // Get list of html lables containing names of all comics related to current character
-    const getAllComics = () => {
-        return profileRecord[0].comics!.items.map(
-            ({ name }: { name: string }) => (
-                <label className="border border-b-black py-2" key={name}>
-                    {" "}
-                    {name}
-                </label>
-            )
-        );
-    };
+    // // Get list of html lables containing names of all comics related to current character
+    // const getAllComics = () => {
+    //     return comicData.map((comic: any, i: number) => (
+    //         <label className="border border-b-black py-2" key={i}>
+    //             {comic.title}
+    //         </label>
+    //     ));
+    // };
 
-    // Get list of html lables containing names of all series related to current character
-    const getAllSeries = () => {
-        return profileRecord[0].series!.items.map(
-            ({ name }: { name: string }) => (
-                <label className="border border-b-black py-2" key={name}>
-                    {" "}
-                    {name}
-                </label>
-            )
-        );
-    };
+    // // Get list of html lables containing names of all series related to current character
+    // const getAllSeries = () => {
+    //     return seriesData.map((series: any, i: number) => (
+    //         <label className="border border-b-black py-2" key={i}>
+    //             {series.title}
+    //         </label>
+    //     ));
+    // };
 
-    if (profileRecord[0].id === 0) return null;
+    if (profileRecord.series[0].title === "") return null;
     else
         return (
             <div className="w-full h-screen flex flex-col justify-center items-center ">
                 <div className="flex justify-center items-center transition duration-300 ease-in-out hover:scale-95 shadow-[20px_25px_25px_5px_rgb(0,0,0,0.3)] bg-orange-100">
-                    <div>
-                        <Card
-                            style={{
-                                minWidth: 100,
-                                maxWidth: "30vw",
-                                textAlign: "center",
-                            }}
-                            cover={
-                                <img
-                                    style={{
-                                        minWidth: 100,
-                                        maxWidth: 300,
-                                    }}
-                                    alt="example"
-                                    src={`${profileRecord[0].thumbnail.path}.${profileRecord[0].thumbnail.extension}`}
-                                />
-                            }
-                        >
-                            <Meta
-                                title={profileRecord[0].name}
-                                description={
-                                    profileRecord[0].description
-                                        ? profileRecord[0].description
-                                        : "A mysterious person without any description"
-                                }
+                    <Card
+                        style={{
+                            minWidth: 100,
+                            maxWidth: "30vw",
+                            textAlign: "center",
+                        }}
+                        cover={
+                            <img
+                                style={{
+                                    minWidth: 100,
+                                    maxWidth: 300,
+                                }}
+                                alt="example"
+                                src={`${record.thumbnail.path}.${record.thumbnail.extension}`}
                             />
-                        </Card>
-                    </div>
-                    <div className="flex">
+                        }
+                    >
+                        <Meta
+                            title={record.name}
+                            description={
+                                record.description
+                                    ? record.description
+                                    : "A mysterious person without any description"
+                            }
+                        />
+                    </Card>
+                    <ComicSeriesCols
+                        record={record}
+                        comicData={comicData}
+                        seriesData={seriesData}
+                    />
+                    {/* <div className="flex">
                         <div className="p-4 text-xs lg:text-xl md:text-lg sm:text-sm">
-                            <h1>
-                                <b>Comic</b> (
-                                {profileRecord[0].comics.available})
+                            <h1 className="bg-red-500 text-white p-1">
+                                <b>Comic</b> ({record.comics.available})
                             </h1>
                             <div
                                 className="overflow-auto max-h-80 flex flex-col "
@@ -92,9 +95,8 @@ const CharacterDetail = () => {
                             </div>
                         </div>
                         <div className="p-4 text-xs lg:text-xl md:text-lg sm:text-sm">
-                            <h1>
-                                <b>Series</b> (
-                                {profileRecord[0].comics.available})
+                            <h1 className="bg-indigo-500 text-white p-1">
+                                <b>Series</b> ({record.comics.available})
                             </h1>
                             <div
                                 className="overflow-auto max-h-80 flex flex-col"
@@ -103,7 +105,7 @@ const CharacterDetail = () => {
                                 {getAllSeries()}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
