@@ -1,21 +1,24 @@
-import CharacterChart from "./Components/CharacterChart";
-import CharacterTable from "./Components/CharacterTable";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./StateManagement/Store";
+import { setIsLoaded } from "./StateManagement/Slices/uiSlice";
+import Home from "./Components/Home";
+import Loading from "./Components/Loading";
 
 function App() {
+    const dispatch = useDispatch();
+    const { records } = useSelector((state: RootState) => state.character);
+    const { isLoaded } = useSelector((state: RootState) => state.ui);
+
+    useEffect(() => {
+        if (records[0].name !== "Loading...") dispatch(setIsLoaded(true));
+    }, [records]);
+
     return (
-        <div className="bg-gray-100 flex flex-col justify-center items-center overflow-x-hidden">
-            <div className="bg-orange-50 flex flex-col items-center gap-5 justify-center w-screen h-screen">
-                <h1 className="text-3xl font-extrabold text-red-500 md:text-4xl lg:text-5xl">
-                    <span className="text-gray-800">List of </span>
-                    Marvel
-                    <span className="text-gray-800"> Characters</span>
-                </h1>
-                <CharacterTable />
-            </div>
-            <div className="bg-indigo-50 flex flex-col items-center gap-10 justify-center w-screen h-screen">
-                <CharacterChart />
-            </div>
-        </div>
+        <>
+            <Home />
+            {!isLoaded ? <Loading /> : null}
+        </>
     );
 }
 
