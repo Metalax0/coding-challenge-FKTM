@@ -26,4 +26,5 @@ export interface CharacterRecordType {
 
 export interface CharacterStateType {
     records: CharacterRecordType[];
+    selectedRecordsIndex: number[];
 }
