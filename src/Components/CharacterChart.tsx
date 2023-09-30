@@ -29,6 +29,7 @@ const CharacterChart = () => {
         (state: RootState) => state.character
     );
 
+    console.log(selectedRecordsIndex, "INDEXXX");
     const labels = selectedRecordsIndex.map(
         (selectedIndex: number) => records[selectedIndex].name
     );

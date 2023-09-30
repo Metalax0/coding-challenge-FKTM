@@ -8,6 +8,7 @@ import {
     CharacterStateType,
 } from "../../InterfaceAndTypes/characterType";
 
+// Initial state for characterSlice
 const initialState: CharacterStateType = {
     records: [
         {
@@ -44,23 +45,48 @@ const characterOptions: CreateSliceOptions = {
         ) => {
             let updatedSelectedRecordsIndex;
 
+            // If within same page
             if (action.payload) {
-                updatedSelectedRecordsIndex = action.payload.filter(
-                    (item) => !state.selectedRecordsIndex.includes(item)
-                );
-            } else {
+                // If selected all
+                if (
+                    action.payload.length === 20 &&
+                    state.selectedRecordsIndex.length !== 20
+                ) {
+                    let numArray = [];
+                    for (var i = 0; i < 20; i++) {
+                        numArray.push(i);
+                    }
+                    updatedSelectedRecordsIndex = numArray;
+                }
+                // If deselected all
+                else if (
+                    action.payload.length === 20 &&
+                    state.selectedRecordsIndex.length === 20
+                ) {
+                    updatedSelectedRecordsIndex = [0];
+                }
+                // If selected / deselected one
+                else {
+                    const indicesToRemove = action.payload.filter((item) =>
+                        state.selectedRecordsIndex.includes(item)
+                    );
+                    updatedSelectedRecordsIndex = state.selectedRecordsIndex
+                        .filter((item) => !indicesToRemove.includes(item))
+                        .concat(
+                            action.payload.filter(
+                                (item) => !indicesToRemove.includes(item)
+                            )
+                        );
+                }
+            }
+            // If changing page
+            else {
                 updatedSelectedRecordsIndex = [0];
             }
 
             return {
                 ...state,
-                selectedRecordsIndex:
-                    updatedSelectedRecordsIndex.length > 0
-                        ? [
-                              ...state.selectedRecordsIndex,
-                              ...updatedSelectedRecordsIndex,
-                          ]
-                        : [0],
+                selectedRecordsIndex: updatedSelectedRecordsIndex,
             };
         },
     },

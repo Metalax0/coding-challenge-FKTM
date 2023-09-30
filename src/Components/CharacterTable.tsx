@@ -55,7 +55,7 @@ const CharacterTable = () => {
     // Method : Alternates between two background colors for table row
     const getTableDataClass = (i: number) => {
         return `p-0 text-xs flex align-center items-center sm:p-2 sm:text-xs md:text-sm lg:text-base
-            ${i % 2 === 0 ? "bg-indigo-50" : "bg-indigo-100"}`;
+        ${i % 2 === 0 ? "bg-indigo-50" : "bg-indigo-100"} `;
     };
 
     return (
@@ -80,7 +80,7 @@ const CharacterTable = () => {
 
                 <div className="flex flex-col">
                     {records.map((data: CharacterRecordType, i: number) => (
-                        <div className="grid grid-cols-5 align-middle transition duration-300 ease-in-out hover:scale-95 hover:cursor-pointer">
+                        <div className="grid grid-cols-5 align-middle transition duration-300 ease-in-out hover:cursor-pointer">
                             <div className={getTableDataClass(i)}>
                                 <input
                                     type="checkbox"
