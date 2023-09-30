@@ -1,12 +1,14 @@
 import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 import { getCharacterAPIURL } from "../General/getCharacterAPIURL";
 
-export const fetchRecordsById = async (id: number[]) => {
+export const fetchRecordsByName = async (name?: string) => {
     let response, data;
 
     // Error handling : fetching of data from the API
     try {
-        response = await fetch(getCharacterAPIURL(0, URLTypes.RECORDS_BY_ID));
+        response = await fetch(
+            getCharacterAPIURL(0, URLTypes.RECORDS_BY_Name, name)
+        );
     } catch (error) {
         const msg =
             "Error Fetching character records from API. For more details check console (fn + f12) ";

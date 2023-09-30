@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../StateManagement/Store";
-import { setModal } from "../StateManagement/Slices/uiSlice";
+import { setModal } from "../../StateManagement/Slices/uiSlice";
+import { RootState } from "../../StateManagement/Store";
 
 const ModalCollection = () => {
     const dispatch = useDispatch();

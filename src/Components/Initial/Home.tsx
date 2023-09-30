@@ -1,7 +1,7 @@
-import CharacterChart from "./CharacterChart";
-import CharacterSearch from "./CharacterSearch";
-import CharacterTable from "./CharacterTable";
-import TablePagination from "./TablePagination";
+import CharacterChart from "../Character/CharacterChart";
+import CharacterSearch from "../Character/CharacterSearch";
+import CharacterTable from "../Character/CharacterTable";
+import TablePagination from "../Table/TablePagination";
 
 const Home = () => {
     return (

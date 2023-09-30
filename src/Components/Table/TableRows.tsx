@@ -1,9 +1,9 @@
-import { CharacterRecordType } from "../InterfaceAndTypes/characterType";
-import { characterTableHeadings } from "../Data/table";
-import TableCell from "./TableCell";
+import { CharacterRecordType } from "../../InterfaceAndTypes/characterType";
+import { characterTableHeadings } from "../../Data/table";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedRecordsIndex } from "../StateManagement/Slices/characterSlice";
-import { RootState } from "../StateManagement/Store";
+import { setSelectedRecordsIndex } from "../../StateManagement/Slices/characterSlice";
+import { RootState } from "../../StateManagement/Store";
+import TableCell from "./TableCell";
 
 const TableRows = () => {
     const dispatch = useDispatch();

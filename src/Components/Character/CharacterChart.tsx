@@ -9,7 +9,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
-import { RootState } from "../StateManagement/Store";
+import { RootState } from "../../StateManagement/Store";
 
 ChartJS.register(
     CategoryScale,

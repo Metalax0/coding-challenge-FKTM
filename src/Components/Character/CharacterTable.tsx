@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCharacterRecords } from "../Functions/General/setCharacterRecords";
-import { characterTableHeadings } from "../Data/table";
-import TableHeadings from "./TableHeadings";
-import TableRows from "./TableRows";
+import { setCharacterRecords } from "../../Functions/General/setCharacterRecords";
+import { characterTableHeadings } from "../../Data/table";
+import TableHeadings from "../Table/TableHeadings";
+import TableRows from "../Table/TableRows";
+import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 
 const CharacterTable = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setCharacterRecords({ offset: 0, dispatch });
+        setCharacterRecords({
+            offset: 0,
+            dispatch,
+            type: URLTypes.RECORDS_ALL,
+        });
     }, []);
 
     return (

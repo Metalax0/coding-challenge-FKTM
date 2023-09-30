@@ -1,6 +1,6 @@
 import { Image } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
-import { TableCellProps } from "../InterfaceAndTypes/tableType";
+import { TableCellProps } from "../../InterfaceAndTypes/tableType";
 
 const TableCell = ({
     rowNum,

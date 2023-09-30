@@ -1,8 +1,9 @@
 import { Pagination } from "antd";
 import { useDispatch } from "react-redux";
-import { setSelectedRecordsIndex } from "../StateManagement/Slices/characterSlice";
-import { setActivePage } from "../StateManagement/Slices/tableSlice";
-import { setCharacterRecords } from "../Functions/General/setCharacterRecords";
+import { setSelectedRecordsIndex } from "../../StateManagement/Slices/characterSlice";
+import { setActivePage } from "../../StateManagement/Slices/tableSlice";
+import { setCharacterRecords } from "../../Functions/General/setCharacterRecords";
+import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
 
 const TablePagination = () => {
     const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const TablePagination = () => {
     const handlePageChange = (page: number) => {
         const offset = page === 1 ? 0 : (page - 1) * 20;
 
-        setCharacterRecords({ offset, dispatch });
+        setCharacterRecords({ offset, dispatch, type: URLTypes.RECORDS_ALL });
         dispatch(setActivePage(page));
         dispatch(setSelectedRecordsIndex(null));
     };
