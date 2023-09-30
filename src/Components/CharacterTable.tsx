@@ -44,7 +44,13 @@ const CharacterTable = () => {
 
     // Method : Keeps track of character data to represent in chart
     const handleCharacterSelection = (e: any) => {
-        dispatch(setSelectedRecordsIndex(parseInt(e.target.id)));
+        console.log("selected");
+        let selectedIndex =
+            e.target.id === "checkbox-all"
+                ? records.map((data: CharacterRecordType, i: number) => i)
+                : [parseInt(e.target.id)];
+        console.log(selectedIndex);
+        dispatch(setSelectedRecordsIndex(selectedIndex));
     };
 
     console.log(records);
@@ -62,11 +68,17 @@ const CharacterTable = () => {
                 style={{ height: "75vh", overflow: "auto" }}
             >
                 <div className="grid grid-cols-5 bg-red-500 sticky top-0 z-10 font-bold text-xs md:text-sm">
-                    {tableHeadings.map((heading, index) => (
-                        <div key={index} className="p-2 text-center">
-                            {heading}
-                        </div>
-                    ))}
+                    <div className="p-2 text-center">
+                        <input
+                            type="checkbox"
+                            onChange={handleCharacterSelection}
+                            id={"checkbox-all"}
+                        />
+                    </div>
+                    <div className="p-2 text-center">S.N</div>
+                    <div className="p-2 text-center">Name</div>
+                    <div className="p-2 text-center">Description</div>
+                    <div className="p-2 text-center">Thumbnail</div>
                 </div>
 
                 <div className="flex flex-col">
@@ -116,7 +128,7 @@ const CharacterTable = () => {
                                         data.thumbnail.extension
                                     }
                                     alt="Thumbnail"
-                                    className="lg:w-28 w-1/2"
+                                    className="w-1/2"
                                 />
                             </div>
                         </div>

@@ -40,12 +40,12 @@ const characterOptions: CreateSliceOptions = {
         // Sets the index of data to be shown in bar chart
         setSelectedRecordsIndex: (
             state: CharacterStateType,
-            action: PayloadAction<number | null>
+            action: PayloadAction<number[] | null>
         ) => {
             return {
                 ...state,
                 selectedRecordsIndex: action.payload
-                    ? [...state.selectedRecordsIndex, action.payload]
+                    ? [...state.selectedRecordsIndex, ...action.payload]
                     : [0],
             };
         },

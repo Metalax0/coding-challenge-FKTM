@@ -50,13 +50,17 @@ const CharacterChart = () => {
     };
 
     return (
-        <div className="flex flex-col gap-10 items-center justify-center w-2/3 h-screen">
+        <div className="flex flex-col gap-5 items-center justify-center w-2/3 h-screen">
             <h1 className="text-3xl font-extrabold text-gray-800 md:text-4xl lg:text-5xl">
                 <span className=" text-red-500">Characters</span> And
                 Their&nbsp;
                 <span className=" text-red-500">Total</span>
                 &nbsp;Comic Appearance
             </h1>
+            <p className="w-full text-lg text-gray-500">
+                Select characters from the table above, to show them in this
+                chart
+            </p>
             <Bar options={options} data={data} />
         </div>
     );
