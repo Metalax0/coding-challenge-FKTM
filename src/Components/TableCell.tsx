@@ -13,7 +13,7 @@ const TableCell = ({
     // Method : Alternates between two background colors for table row
     const getTableDataClass = (i: number) => {
         return `p-0 text-xs flex align-center items-center sm:p-2 sm:text-xs md:text-sm lg:text-base
-        ${i % 2 === 0 ? "bg-indigo-50" : "bg-indigo-100"} `;
+        ${selectedRecordsIndex.includes(i) ? "bg-indigo-100" : null} `;
     };
 
     // Method: Returns JSX elements according to heading type

@@ -35,7 +35,7 @@ const TableRows = () => {
                 // One row per reocr
                 <div
                     key={i}
-                    className="grid grid-cols-5 align-middle transition duration-300 ease-in-out hover:cursor-pointer"
+                    className="grid grid-cols-5 align-middle transition duration-300 ease-in-out hover:cursor-pointer hover:bg-indigo-300"
                 >
                     {/* One cell per every heading (column name) */}
                     {characterTableHeadings.map((heading: string, j) => (

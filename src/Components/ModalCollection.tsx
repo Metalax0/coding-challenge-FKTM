@@ -1,12 +1,23 @@
 import { Modal } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../StateManagement/Store";
+import { setModal } from "../StateManagement/Slices/uiSlice";
 
 const ModalCollection = () => {
+    const dispatch = useDispatch();
     const { modal } = useSelector((state: RootState) => state.ui);
 
+    const handleCancelClick = () => {
+        dispatch(
+            setModal({
+                isOpen: false,
+                content: "",
+                type: "",
+            })
+        );
+    };
+
     const getModalClass = () => {
-        console.log(modal.type);
         switch (modal.type) {
             case "error":
                 return "text-red-700";
@@ -17,7 +28,7 @@ const ModalCollection = () => {
     };
 
     return (
-        <Modal title="ERROR" open={modal.isOpen}>
+        <Modal title="ERROR" open={modal.isOpen} onCancel={handleCancelClick}>
             <p className={getModalClass()}>{modal.content}</p>
         </Modal>
     );
