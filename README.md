@@ -1,5 +1,7 @@
 # Marvel API - Dashboard
 
+## Author : Sampanna Pokharel
+
 ## How to run
 
 clone the repositry
