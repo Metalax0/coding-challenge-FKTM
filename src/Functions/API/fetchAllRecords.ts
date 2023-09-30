@@ -1,7 +1,11 @@
 import { URLTypes } from "../../InterfaceAndTypes/URLTypes";
+import { setModal } from "../../StateManagement/Slices/uiSlice";
 import { getCharacterAPIURL } from "../General/getCharacterAPIURL";
 
-export const fetchAllRecords = async (offset: number) => {
+export const fetchAllRecords = async (
+    offset: number,
+    dispatch: React.Dispatch<any>
+) => {
     let response, data;
 
     // Error handling : fetching of data from the API
@@ -10,9 +14,15 @@ export const fetchAllRecords = async (offset: number) => {
             getCharacterAPIURL(offset, URLTypes.RECORDS_ALL)
         );
     } catch (error) {
-        console.error(
-            "Error Fetching character records from API. Details => ",
-            error
+        const msg =
+            "Error Fetching character records from API. For more details check console (fn + f12)";
+        console.error(msg, error);
+        dispatch(
+            setModal({
+                isOpen: true,
+                content: msg,
+                type: "error",
+            })
         );
         return;
     }
@@ -21,10 +31,9 @@ export const fetchAllRecords = async (offset: number) => {
     try {
         data = (await response.json()).data.results;
     } catch (error) {
-        console.error(
-            "Error Converting character data from API. Details => ",
-            error
-        );
+        const msg =
+            "Error Converting character data from API. For more details check console (fn + f12)";
+        console.error(msg, error);
         return;
     }
 

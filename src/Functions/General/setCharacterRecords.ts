@@ -6,6 +6,6 @@ export const setCharacterRecords = async (params: {
     dispatch: React.Dispatch<any>;
 }) => {
     const { offset, dispatch } = params;
-    const characterRecords = await fetchAllRecords(offset);
+    const characterRecords = await fetchAllRecords(offset, dispatch);
     if (characterRecords) dispatch(setCharacterDetails(characterRecords));
 };

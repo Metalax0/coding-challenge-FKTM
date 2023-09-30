@@ -8,10 +8,9 @@ export const fetchRecordsById = async (id: number[]) => {
     try {
         response = await fetch(getCharacterAPIURL(0, URLTypes.RECORDS_BY_ID));
     } catch (error) {
-        console.error(
-            "Error Fetching character records from API. Details => ",
-            error
-        );
+        const msg =
+            "Error Fetching character records from API. For more details check console (fn + f12) ";
+        console.error(msg, error);
         return;
     }
 
@@ -19,10 +18,9 @@ export const fetchRecordsById = async (id: number[]) => {
     try {
         data = (await response.json()).data.results;
     } catch (error) {
-        console.error(
-            "Error Converting character data from API. Details => ",
-            error
-        );
+        const msg =
+            "Error Converting character data from API. For more details check console (fn + f12) ";
+        console.error(msg, error);
         return;
     }
 

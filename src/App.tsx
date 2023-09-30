@@ -4,6 +4,7 @@ import { RootState } from "./StateManagement/Store";
 import { setIsLoaded } from "./StateManagement/Slices/uiSlice";
 import Home from "./Components/Home";
 import Loading from "./Components/Loading";
+import ModalCollection from "./Components/ModalCollection";
 
 function App() {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
     return (
         <>
             <Home />
+            <ModalCollection />
             {!isLoaded ? <Loading /> : null}
         </>
     );
